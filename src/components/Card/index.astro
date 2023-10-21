@@ -1,0 +1,38 @@
+---
+import { Icon } from "astro-icon";
+import Content from "./Content.astro";
+
+interface Props {
+  title?: string;
+  body?: string;
+  colSpan?: string;
+  rowSpan?: string;
+  href?: string;
+}
+
+const { title, body, colSpan, rowSpan, href } = Astro.props;
+---
+
+<div
+  class={`card group overflow-hidden opacity-0 bg-darkslate-500 shadow-lg rounded-lg p-6 border border-darkslate-100 hover:border-primary-500 align-start flex-none h-full justify-start relative transform perspective-1200 w-full transition duration-75 ease-in-out col-span-1 ${
+    colSpan || "md:col-span-2"
+  } ${rowSpan || ""}`}
+>
+  {
+    href ? (
+      <a href={href} class="h-full w-full ddd">
+        <Icon
+          name="ri:arrow-right-up-line"
+          class="h-6 float-right group-hover:text-primary-500 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform ease-in-out duration-100"
+        />
+        <Content title={title} body={body}>
+          <slot />
+        </Content>
+      </a>
+    ) : (
+      <Content title={title} body={body}>
+        <slot />
+      </Content>
+    )
+  }
+</div>

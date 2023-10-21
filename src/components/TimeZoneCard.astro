@@ -1,0 +1,26 @@
+---
+import { getCurrentTimeInNorway, formatTimeForNorway } from "../lib/helpers";
+import Card from "./Card/index.astro";
+---
+
+<script>
+  import { formatTimeForNorway } from "../lib/helpers";
+
+  function updateClock() {
+    const timeDisplay = document.getElementById("timeDisplay");
+    if (timeDisplay) {
+      timeDisplay.textContent = formatTimeForNorway(new Date());
+    }
+  }
+
+  setInterval(updateClock, 1000);
+</script>
+
+<Card colSpan="lg:col-span-2" rowSpan="md:row-span-1" title="My Time">
+  <h4
+    id="timeDisplay"
+    class="text-5xl w-full h-[calc(100%-28px)] font-serif flex justify-center items-center"
+  >
+    {formatTimeForNorway(getCurrentTimeInNorway())}
+  </h4>
+</Card>
